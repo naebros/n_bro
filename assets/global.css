@@ -3,17 +3,20 @@
    Structure:
      1. Reset & Base
      2. Design Tokens (CSS Variables)
-     3. Typography
-     4. Layout Utilities
-     5. Components
-        5a. Header
-        5b. Nav
-        5c. Buttons
-        5d. Hero
-        5e. Section
-        5f. Cards
-        5g. Popup
-        5h. Footer
+     3. Dark Mode
+     4. Typography
+     5. Layout Utilities
+     6. Components
+        6a. Header
+        6b. Nav
+        6c. Buttons
+        6d. Hero
+        6e. Section
+        6f. Cards
+        6g. Popup
+        6h. Footer
+     7. Scroll Reveal Animations
+     8. Responsive (mobile)
    ============================================================ */
 
 
@@ -35,13 +38,16 @@ body {
   font-family: var(--font-body);
   color: var(--color-text);
   background: var(--color-bg);
+  transition:
+    background var(--transition-normal),
+    color var(--transition-normal);
 }
 
 
 /* ── 2. Design Tokens ── */
 
 :root {
-  /* Colors */
+  /* Colors — light theme */
   --color-bg:           #ffffff;
   --color-surface:      #f5f5f5;
   --color-surface-alt:  #e3e3e3;
@@ -50,8 +56,18 @@ body {
   --color-text:         #1e1e1e;
   --color-text-muted:   #757575;
   --color-text-subtle:  #555555;
-  --color-inverted-bg:  #2c2c2c;
-  --color-inverted-text:#f5f5f5;
+  --color-inverted-bg:    #2c2c2c;
+  --color-inverted-hover: #333333;
+  --color-inverted-text:  #f5f5f5;
+
+  /* Hover for buttons using --color-text as background */
+  --color-text-hover:     #3a3a3a;
+
+  /* Header glass */
+  --color-header-bg: rgba(255, 255, 255, 0.7);
+
+  /* SVG logo fill */
+  --color-logo: #1e1e1e;
 
   /* Typography */
   --font-display: 'Playfair Display', serif;
@@ -74,8 +90,8 @@ body {
   --radius-xl: 16px;
 
   /* Shadows */
-  --shadow-card:   0 4px 20px rgba(0, 0, 0, 0.08);
-  --shadow-popup:  0 24px 64px rgba(0, 0, 0, 0.18);
+  --shadow-card:    0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-popup:   0 24px 64px rgba(0, 0, 0, 0.18);
   --shadow-overlay: rgba(0, 0, 0, 0.35);
 
   /* Transitions */
@@ -86,14 +102,37 @@ body {
   /* Layout */
   --content-max-width: 1072px;
   --header-height: 67px;
-
-  /* Intersection observer scroll margins (nav active state) */
-  --scroll-margin-top:    -40%;
-  --scroll-margin-bottom: -55%;
 }
 
 
-/* ── 3. Typography ── */
+/* ── 3. Dark Mode ── */
+
+[data-theme='dark'] {
+  --color-bg:           #111111;
+  --color-surface:      #1a1a1a;
+  --color-surface-alt:  #252525;
+  --color-border:       #2e2e2e;
+  --color-border-mid:   #555555;
+  --color-text:         #f0f0f0;
+  --color-text-muted:   #888888;
+  --color-text-subtle:  #aaaaaa;
+  --color-inverted-bg:    #f0f0f0;
+  --color-inverted-hover: #d0d0d0;
+  --color-inverted-text:  #111111;
+
+  /* Hover for buttons using --color-text as background */
+  --color-text-hover:     #cccccc;
+
+  --color-header-bg: rgba(17, 17, 17, 0.75);
+  --color-logo: #f0f0f0;
+
+  --shadow-card:    0 4px 24px rgba(0, 0, 0, 0.4);
+  --shadow-popup:   0 24px 64px rgba(0, 0, 0, 0.6);
+  --shadow-overlay: rgba(0, 0, 0, 0.6);
+}
+
+
+/* ── 4. Typography ── */
 
 .text-display-lg {
   font-family: var(--font-display);
@@ -151,7 +190,7 @@ body {
 }
 
 
-/* ── 4. Layout Utilities ── */
+/* ── 5. Layout Utilities ── */
 
 .content-width {
   width: 100%;
@@ -159,9 +198,9 @@ body {
 }
 
 
-/* ── 5. Components ── */
+/* ── 6. Components ── */
 
-/* ── 5a. Header ── */
+/* ── 6a. Header ── */
 
 .header {
   position: sticky;
@@ -170,13 +209,13 @@ body {
   width: 100%;
   height: var(--header-height);
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
   padding: var(--space-4) var(--space-6);
   gap: var(--space-5);
-  background: rgba(255, 255, 255, 0.7);
+  background: var(--color-header-bg);
   border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(6.5px);
+  transition: background var(--transition-normal), border-color var(--transition-normal);
 }
 
 .header__logo {
@@ -193,14 +232,50 @@ body {
   height: 35px;
 }
 
+/* Logo paths adapt to dark mode via CSS fill */
+.header__logo svg path,
+.footer__logo svg path {
+  fill: var(--color-logo);
+  transition: fill var(--transition-normal);
+}
+
 .header__auth {
   display: flex;
   align-items: center;
   gap: var(--space-3);
+  margin-left: auto;
+}
+
+/* Dark mode toggle button */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: none;
+  border: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.theme-toggle:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.theme-toggle [data-lucide] {
+  width: 15px;
+  height: 15px;
 }
 
 
-/* ── 5b. Nav ── */
+/* ── 6b. Nav ── */
 
 .nav {
   display: flex;
@@ -214,7 +289,6 @@ body {
 .nav__pill {
   display: inline-flex;
   align-items: center;
-  gap: var(--space-1);
   padding: var(--space-2);
   height: 32px;
   border-radius: var(--radius-md);
@@ -224,7 +298,7 @@ body {
   color: var(--color-text);
   text-decoration: none;
   cursor: pointer;
-  transition: background var(--transition-normal);
+  transition: background var(--transition-normal), color var(--transition-normal);
 }
 
 .nav__pill.is-active,
@@ -233,7 +307,7 @@ body {
 }
 
 
-/* ── 5c. Buttons ── */
+/* ── 6c. Buttons ── */
 
 /*
   Icon-reveal pattern (applied to all button variants):
@@ -281,6 +355,10 @@ body {
   background: var(--color-surface-alt);
   border: 1px solid var(--color-border-mid);
   color: var(--color-text);
+  transition:
+    gap var(--transition-normal),
+    background var(--transition-normal),
+    border-color var(--transition-normal);
 }
 
 .btn--outline:hover { background: var(--color-border); }
@@ -290,9 +368,12 @@ body {
   background: var(--color-inverted-bg);
   border: 1px solid var(--color-inverted-bg);
   color: var(--color-inverted-text);
+  transition:
+    gap var(--transition-normal),
+    background var(--transition-normal);
 }
 
-.btn--dark:hover { background: #333333; }
+.btn--dark:hover { background: var(--color-inverted-hover); }
 
 /* Modifier: medium size (used in card actions) */
 .btn--md {
@@ -322,7 +403,7 @@ body {
 }
 
 .btn--download:hover {
-  background: #333333;
+  background: var(--color-text-hover);
   gap: var(--space-2);
 }
 
@@ -397,7 +478,7 @@ body {
 }
 
 .btn--popup-primary:hover {
-  background: #333333;
+  background: var(--color-text-hover);
   gap: 6px;
 }
 
@@ -416,7 +497,7 @@ body {
 }
 
 
-/* ── 5d. Hero ── */
+/* ── 6d. Hero ── */
 
 .hero {
   width: 100%;
@@ -429,6 +510,7 @@ body {
   background: var(--color-surface);
   text-align: center;
   gap: var(--space-2);
+  transition: background var(--transition-normal);
 }
 
 /* Modifier: download hero has extra gap for the CTA button */
@@ -437,7 +519,7 @@ body {
 }
 
 
-/* ── 5e. Section ── */
+/* ── 6e. Section ── */
 
 .section {
   width: 100%;
@@ -447,6 +529,7 @@ body {
   padding: var(--space-8);
   gap: var(--space-7);
   background: var(--color-bg);
+  transition: background var(--transition-normal);
 }
 
 .section__heading {
@@ -458,7 +541,7 @@ body {
 }
 
 
-/* ── 5f. Cards ── */
+/* ── 6f. Cards ── */
 
 /* Shared card base */
 .card {
@@ -474,7 +557,10 @@ body {
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   cursor: pointer;
-  transition: box-shadow var(--transition-normal);
+  transition:
+    box-shadow var(--transition-normal),
+    background var(--transition-normal),
+    border-color var(--transition-normal);
 }
 
 .card:hover {
@@ -520,6 +606,7 @@ body {
   justify-content: center;
   overflow: hidden;
   flex-shrink: 0;
+  transition: background var(--transition-normal);
 }
 
 .card__body {
@@ -545,7 +632,7 @@ body {
 }
 
 
-/* ── 5g. Popup ── */
+/* ── 6g. Popup ── */
 
 .popup-overlay {
   position: fixed;
@@ -577,7 +664,10 @@ body {
   flex-direction: column;
   gap: var(--space-5);
   transform: translateY(16px) scale(0.97);
-  transition: transform var(--transition-popup);
+  transition:
+    transform var(--transition-popup),
+    background var(--transition-normal);
+  margin: var(--space-4);
 }
 
 .popup-overlay.is-open .popup {
@@ -601,6 +691,7 @@ body {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  transition: background var(--transition-normal);
 }
 
 .popup__close {
@@ -616,7 +707,8 @@ body {
   color: var(--color-text-muted);
   transition:
     background var(--transition-fast),
-    color var(--transition-fast);
+    color var(--transition-fast),
+    border-color var(--transition-fast);
 }
 
 .popup__close:hover {
@@ -640,6 +732,7 @@ body {
   border: 1px solid var(--color-surface-alt);
   font-size: 13px;
   color: var(--color-text-subtle);
+  transition: background var(--transition-normal);
 }
 
 .popup__footer {
@@ -649,7 +742,7 @@ body {
 }
 
 
-/* ── 5h. Footer ── */
+/* ── 6h. Footer ── */
 
 .footer {
   box-sizing: border-box;
@@ -662,6 +755,9 @@ body {
   width: 100%;
   background: var(--color-bg);
   border-top: 1px solid var(--color-border);
+  transition:
+    background var(--transition-normal),
+    border-color var(--transition-normal);
 }
 
 .footer__logo {
@@ -690,6 +786,7 @@ body {
   line-height: 1.4;
   color: var(--color-text);
   text-decoration: none;
+  transition: color var(--transition-fast);
 }
 
 .footer__links a:hover {
@@ -711,11 +808,6 @@ body {
   height: 24px;
 }
 
-.nav__pill [data-lucide] {
-  width: 15px;
-  height: 15px;
-}
-
 .btn [data-lucide] {
   height: 15px;
 }
@@ -728,6 +820,177 @@ body {
 }
 
 .btn--download [data-lucide] {
-  width: 20px;
   height: 20px;
+}
+
+
+/* ── 7. Scroll Reveal Animations ── */
+
+/*
+  Elements with [data-reveal] start hidden and animate in
+  when IntersectionObserver adds the .is-visible class.
+  Supports: fade-up (default), fade-left, fade-right, scale
+*/
+
+[data-reveal] {
+  opacity: 0;
+  transition:
+    opacity 0.55s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-reveal='fade-up'],
+[data-reveal] {
+  transform: translateY(28px);
+}
+
+[data-reveal='fade-left'] {
+  transform: translateX(-28px);
+}
+
+[data-reveal='fade-right'] {
+  transform: translateX(28px);
+}
+
+[data-reveal='scale'] {
+  transform: scale(0.94);
+}
+
+[data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delay for card children */
+[data-reveal-stagger] > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+[data-reveal-stagger].is-visible > *:nth-child(1) { transition-delay: 0ms;   opacity: 1; transform: none; }
+[data-reveal-stagger].is-visible > *:nth-child(2) { transition-delay: 100ms; opacity: 1; transform: none; }
+[data-reveal-stagger].is-visible > *:nth-child(3) { transition-delay: 200ms; opacity: 1; transform: none; }
+[data-reveal-stagger].is-visible > *:nth-child(4) { transition-delay: 300ms; opacity: 1; transform: none; }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  [data-reveal-stagger] > * {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+
+/* ── 8. Responsive (mobile) ── */
+
+/* Tablet: ≤ 768px */
+@media (max-width: 768px) {
+  /* Typography scale down */
+  .text-display-lg { font-size: 48px; }
+  .text-display-md { font-size: 40px; }
+  .text-subtitle   { font-size: 22px; }
+
+  /* Hero */
+  .hero {
+    min-height: 360px;
+    padding: 80px var(--space-5);
+  }
+
+  /* Section */
+  .section {
+    padding: var(--space-6) var(--space-5);
+    gap: var(--space-6);
+  }
+
+  /* Card image becomes smaller */
+  .card__image {
+    width: 120px;
+    min-width: 120px;
+    height: 120px;
+  }
+
+  /* Header */
+  .header {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+    height: auto;
+    min-height: var(--header-height);
+  }
+}
+
+/* Mobile: ≤ 480px */
+@media (max-width: 480px) {
+  /* Typography scale down further */
+  .text-display-lg { font-size: 36px; }
+  .text-display-md { font-size: 32px; }
+  .text-display-sm { font-size: 20px; }
+  .text-subtitle   { font-size: 18px; }
+  .text-label      { font-size: 16px; }
+
+  /* Hero */
+  .hero {
+    min-height: 280px;
+    padding: 60px var(--space-4);
+  }
+
+  /* Section */
+  .section {
+    padding: var(--space-5) var(--space-4);
+  }
+
+  /* Cards stack vertically, image goes full width */
+  .card {
+    flex-direction: column;
+  }
+
+  .card__image {
+    width: 100%;
+    min-width: unset;
+    height: 140px;
+    border-radius: var(--radius-md);
+  }
+
+  .card-grid {
+    gap: var(--space-4);
+  }
+
+  /* Card grid — single column on mobile */
+  .card-grid .card {
+    flex: 1 1 100%;
+    min-width: unset;
+  }
+
+  /* Header — hide nav text labels, keep icons */
+  .header {
+    padding: var(--space-3);
+    gap: var(--space-2);
+  }
+
+  /* Auth buttons — icon only on very small screens */
+  .header__auth .btn span { display: none; }
+
+  /* Download button */
+  .btn--download {
+    font-size: 16px;
+    padding: 12px 20px;
+    height: 46px;
+  }
+
+  /* Footer */
+  .footer {
+    padding: var(--space-5) var(--space-4) var(--space-6);
+    flex-direction: column;
+    gap: var(--space-5);
+  }
+
+  /* Popup */
+  .popup {
+    margin: var(--space-3);
+    padding: var(--space-5);
+  }
 }
