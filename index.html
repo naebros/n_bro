@@ -5,494 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Naebro's Projects</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Inter', sans-serif;
-      color: #1E1E1E;
-      background: #fff;
-    }
-
-    /* ── HEADER ── */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      width: 100%;
-      height: 67px;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      padding: 16px 32px;
-      gap: 24px;
-      background: rgba(255,255,255,0.7);
-      border-bottom: 1px solid #D9D9D9;
-      backdrop-filter: blur(6.5px);
-    }
-
-    .header-logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 40px;
-      height: 35px;
-    }
-
-    .header-logo svg {
-      width: 23.33px;
-      height: 35px;
-    }
-
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 8px;
-      flex: 1;
-    }
-
-    .nav-pill {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px;
-      height: 32px;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 100%;
-      color: #1E1E1E;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .nav-pill.active {
-      background: #F5F5F5;
-    }
-
-    .header-auth {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      justify-content: center;
-      align-items: center;
-      padding: 8px 12px;
-      height: 32px;
-      border-radius: 8px;
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 100%;
-      cursor: pointer;
-      text-decoration: none;
-      border: none;
-      white-space: nowrap;
-    }
-
-    .btn-outline {
-      background: #E3E3E3;
-      border: 1px solid #767676;
-      color: #1E1E1E;
-    }
-
-    .btn-dark {
-      background: #2C2C2C;
-      border: 1px solid #2C2C2C;
-      color: #F5F5F5;
-    }
-
-    /* ── HERO ── */
-    .hero {
-      width: 100%;
-      min-height: 551px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 160px 64px;
-      background: #F5F5F5;
-      text-align: center;
-      position: relative;
-    }
-
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 700;
-      font-size: 72px;
-      line-height: 120%;
-      letter-spacing: -0.03em;
-      color: #1E1E1E;
-      max-width: 636px;
-    }
-
-    .hero-subtitle {
-      font-family: 'Inter', sans-serif;
-      font-weight: 400;
-      font-size: 32px;
-      line-height: 120%;
-      color: #757575;
-      margin-top: 8px;
-    }
-
-    /* ── CARD GRID SECTION ── */
-    .card-grid-section {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 64px;
-      gap: 48px;
-      background: #FFFFFF;
-    }
-
-    .section-heading {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
-      gap: 8px;
-      width: 100%;
-      max-width: 1072px;
-    }
-
-    .section-heading h2 {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      font-size: 64px;
-      line-height: 120%;
-      letter-spacing: -0.02em;
-      color: #1E1E1E;
-    }
-
-    .section-heading p {
-      font-family: 'Inter', sans-serif;
-      font-size: 20px;
-      line-height: 120%;
-      color: #757575;
-    }
-
-    /* ── CARDS ROW (3 col) ── */
-    .cards {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 48px;
-      width: 100%;
-      max-width: 1072px;
-    }
-
-    .card {
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      align-content: flex-start;
-      padding: 24px;
-      gap: 24px;
-      flex: 1 1 240px;
-      min-width: 240px;
-      background: #FFFFFF;
-      border: 1px solid #D9D9D9;
-      border-radius: 8px;
-      transition: box-shadow 0.2s;
-    }
-
-    .card:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-
-    .card-image {
-      width: 160px;
-      min-width: 160px;
-      height: 160px;
-      background: #E3E3E3;
-      border-radius: 4px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .card-image svg {
-      opacity: 0.35;
-      width: 48px;
-      height: 48px;
-    }
-
-    .card-body {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      flex: 1 1 160px;
-      min-width: 160px;
-    }
-
-    .card-text {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .card-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600;
-      font-size: 24px;
-      line-height: 120%;
-      letter-spacing: -0.02em;
-      color: #1E1E1E;
-    }
-
-    .card-desc {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 140%;
-      color: #757575;
-    }
-
-    /* ── WIDE CARD (docs) ── */
-    .cards-wide {
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      gap: 48px;
-      width: 100%;
-      max-width: 1072px;
-    }
-
-    .card-wide {
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      align-items: flex-start;
-      align-content: flex-start;
-      padding: 24px;
-      gap: 24px;
-      flex: 1 1 100%;
-      background: #FFFFFF;
-      border: 1px solid #D9D9D9;
-      border-radius: 8px;
-      transition: box-shadow 0.2s;
-    }
-
-    .card-wide:hover {
-      box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    }
-
-    .card-wide .card-body {
-      flex: 1 1 160px;
-    }
-
-    .card-wide .card-text .card-title {
-      font-size: 24px;
-    }
-
-    .btn-group {
-      display: flex;
-      flex-direction: row;
-      justify-content: flex-end;
-      align-items: center;
-      gap: 16px;
-      width: 100%;
-    }
-
-    .btn-md {
-      padding: 12px;
-      height: 40px;
-      font-size: 16px;
-      border-radius: 8px;
-    }
-
-    /* ── DOWNLOAD HERO ── */
-    .hero-download {
-      width: 100%;
-      min-height: 551px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 160px 64px;
-      background: #F5F5F5;
-      text-align: center;
-    }
-
-    /* ── FOOTER ── */
-    footer {
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: flex-start;
-      padding: 32px 32px 64px;
-      gap: 32px;
-      width: 100%;
-      background: #FFFFFF;
-      border-top: 1px solid #D9D9D9;
-    }
-
-    .footer-logo {
-      display: flex;
-      align-items: center;
-    }
-
-    .footer-links {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .footer-links-title {
-      font-family: 'Inter', sans-serif;
-      font-weight: 600;
-      font-size: 16px;
-      line-height: 140%;
-      color: #1E1E1E;
-      padding-bottom: 4px;
-    }
-
-    .footer-links a {
-      font-family: 'Inter', sans-serif;
-      font-size: 16px;
-      line-height: 140%;
-      color: #1E1E1E;
-      text-decoration: none;
-    }
-
-    .footer-links a:hover { text-decoration: underline; }
-
-    /* ── FIGMA LOGO SVG ── */
-    .figma-icon { display: block; }
-
-    /* ── SMOOTH SCROLL ── */
-    html { scroll-behavior: smooth; }
-
-    /* pill transition */
-    .nav-pill {
-      transition: background 0.2s;
-    }
-
-    /* ── CARD clickable ── */
-    .card { cursor: pointer; }
-
-    /* ── POPUP OVERLAY ── */
-    .popup-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: 200;
-      background: rgba(0,0,0,0.35);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.25s;
-    }
-    .popup-overlay.open {
-      opacity: 1;
-      pointer-events: all;
-    }
-    .popup {
-      background: #fff;
-      border-radius: 16px;
-      padding: 32px;
-      width: 100%;
-      max-width: 480px;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.18);
-      display: flex;
-      flex-direction: column;
-      gap: 24px;
-      transform: translateY(16px) scale(0.97);
-      transition: transform 0.25s cubic-bezier(.4,0,.2,1);
-    }
-    .popup-overlay.open .popup {
-      transform: translateY(0) scale(1);
-    }
-    .popup-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .popup-icon-wrap {
-      width: 48px; height: 48px;
-      border-radius: 10px;
-      background: #F5F5F5;
-      border: 1px solid #E3E3E3;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
-    .popup-close {
-      width: 32px; height: 32px;
-      border-radius: 8px;
-      background: none;
-      border: 1px solid #D9D9D9;
-      cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      color: #757575;
-      transition: background 0.15s, color 0.15s;
-    }
-    .popup-close:hover { background: #F5F5F5; color: #1E1E1E; }
-    .popup-title {
-      font-family: 'Playfair Display', serif;
-      font-weight: 600; font-size: 26px;
-      letter-spacing: -0.02em; color: #1E1E1E; line-height: 120%;
-    }
-    .popup-body {
-      font-family: 'Inter', sans-serif;
-      font-size: 15px; line-height: 160%; color: #757575;
-    }
-    .popup-tags {
-      display: flex; flex-wrap: wrap; gap: 8px;
-    }
-    .popup-tag {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 4px 10px; border-radius: 20px;
-      background: #F5F5F5; border: 1px solid #E3E3E3;
-      font-size: 13px; color: #555;
-    }
-    .popup-footer {
-      display: flex; gap: 12px; justify-content: flex-end;
-    }
-    .btn-popup-secondary {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 18px; height: 40px; border-radius: 8px;
-      font-family: 'Inter', sans-serif; font-size: 15px;
-      background: #F5F5F5; border: 1px solid #D9D9D9; color: #1E1E1E;
-      cursor: pointer; transition: background 0.15s;
-    }
-    .btn-popup-secondary:hover { background: #E3E3E3; }
-    .btn-popup-primary {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 10px 18px; height: 40px; border-radius: 8px;
-      font-family: 'Inter', sans-serif; font-size: 15px;
-      background: #1E1E1E; border: 1px solid #1E1E1E; color: #fff;
-      cursor: pointer; transition: background 0.15s;
-    }
-    .btn-popup-primary:hover { background: #333; }
-
-    /* Lucide size helpers */
-    [data-lucide] { width: 18px; height: 18px; stroke-width: 1.8; }
-    .popup-icon-wrap [data-lucide] { width: 24px; height: 24px; }
-    .nav-pill [data-lucide] { width: 15px; height: 15px; margin-right: 4px; }
-    .btn [data-lucide] { width: 15px; height: 15px; margin-right: 4px; }
-    .card-image [data-lucide] { width: 40px; height: 40px; stroke: #aaa; stroke-width: 1.2; }
-  </style>
+  <link rel="stylesheet" href="assets/global.css" />
 </head>
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="header-logo">
-      <svg class="figma-icon" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- ── HEADER ── -->
+  <header class="header">
+    <div class="header__logo">
+      <svg viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M6 18C6 15.79 7.79 14 10 14H14V22H10C7.79 22 6 20.21 6 18Z" fill="#1E1E1E"/>
         <path d="M14 14H18C20.21 14 22 15.79 22 18C22 20.21 20.21 22 18 22H14V14Z" fill="#1E1E1E"/>
         <path d="M6 10C6 7.79 7.79 6 10 6H14V14H10C7.79 14 6 12.21 6 10Z" fill="#1E1E1E"/>
@@ -501,98 +21,107 @@
       </svg>
     </div>
 
-    <nav>
-      <a href="#projects" class="nav-pill active"><i data-lucide="layout-grid"></i>Projects</a>
-      <a href="#download" class="nav-pill"><i data-lucide="download"></i>Download</a>
+    <nav class="nav" aria-label="Main navigation">
+      <a href="#projects" class="nav__pill is-active"><i data-lucide="layout-grid"></i>Projects</a>
+      <a href="#download" class="nav__pill"><i data-lucide="download"></i>Download</a>
     </nav>
 
-    <div class="header-auth">
-      <a href="#docs" class="btn btn-outline"><i data-lucide="book-open"></i>Docs</a>
-      <a href="#github" class="btn btn-dark"><i data-lucide="github"></i>Github</a>
+    <div class="header__auth">
+      <a href="#projects" class="btn btn--outline"><i data-lucide="book-open"></i>Docs</a>
+      <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="btn btn--dark">
+        <i data-lucide="github"></i>Github
+      </a>
     </div>
   </header>
 
-  <!-- HERO -->
+
+  <!-- ── HERO ── -->
   <section class="hero">
-    <h1 class="hero-title">Naebro`s projects</h1>
-    <p class="hero-subtitle">or view docs</p>
+    <h1 class="text-display-lg">Naebro's projects</h1>
+    <p class="text-subtitle">or view docs</p>
   </section>
 
-  <!-- PROJECTS GRID -->
-  <section class="card-grid-section" id="projects">
-    <div class="section-heading">
-      <h2>Projects</h2>
-      <p>Click to see more</p>
+
+  <!-- ── PROJECTS ── -->
+  <section class="section" id="projects">
+    <div class="section__heading content-width">
+      <h2 class="text-display-md">Projects</h2>
+      <p class="text-label">Click to see more</p>
     </div>
 
-    <!-- 3 cards -->
-    <div class="cards">
-      <div class="card" data-project="0">
-        <div class="card-image">
+    <!-- 3-column card grid -->
+    <div class="card-grid">
+      <article class="card" data-project="0" role="button" tabindex="0" aria-label="Open Dashboard UI details">
+        <div class="card__image">
           <i data-lucide="layout-dashboard"></i>
         </div>
-        <div class="card-body">
-          <div class="card-text">
-            <div class="card-title">Dashboard UI</div>
-            <p class="card-desc">A clean analytics dashboard with real-time charts, filters, and a responsive layout built for modern web apps.</p>
+        <div class="card__body">
+          <div class="card__text">
+            <h3 class="text-display-sm">Dashboard UI</h3>
+            <p class="text-body">A clean analytics dashboard with real-time charts, filters, and a responsive layout built for modern web apps.</p>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="card" data-project="1">
-        <div class="card-image">
+      <article class="card" data-project="1" role="button" tabindex="0" aria-label="Open Component Kit details">
+        <div class="card__image">
           <i data-lucide="code-2"></i>
         </div>
-        <div class="card-body">
-          <div class="card-text">
-            <div class="card-title">Component Kit</div>
-            <p class="card-desc">A reusable component library — buttons, inputs, modals, and more — designed with Figma tokens and exported to code.</p>
+        <div class="card__body">
+          <div class="card__text">
+            <h3 class="text-display-sm">Component Kit</h3>
+            <p class="text-body">A reusable component library — buttons, inputs, modals, and more — designed with Figma tokens and exported to code.</p>
           </div>
         </div>
-      </div>
+      </article>
 
-      <div class="card" data-project="2">
-        <div class="card-image">
+      <article class="card" data-project="2" role="button" tabindex="0" aria-label="Open AI Playground details">
+        <div class="card__image">
           <i data-lucide="sparkles"></i>
         </div>
-        <div class="card-body">
-          <div class="card-text">
-            <div class="card-title">AI Playground</div>
-            <p class="card-desc">An interactive sandbox for testing AI prompts, comparing model outputs, and exploring creative generation workflows.</p>
+        <div class="card__body">
+          <div class="card__text">
+            <h3 class="text-display-sm">AI Playground</h3>
+            <p class="text-body">An interactive sandbox for testing AI prompts, comparing model outputs, and exploring creative generation workflows.</p>
           </div>
         </div>
-      </div>
+      </article>
     </div>
 
-    <!-- Wide / docs card -->
-    <div class="cards-wide">
-      <div class="card-wide">
-        <div class="card-image">
-          <i data-lucide="book-marked" style="width:40px;height:40px;stroke:#aaa;stroke-width:1.2"></i>
+    <!-- Full-width docs card -->
+    <div class="card-row">
+      <article class="card">
+        <div class="card__image">
+          <i data-lucide="book-marked"></i>
         </div>
-        <div class="card-body">
-          <div class="card-text">
-            <div class="card-title">View the docs</div>
-            <p class="card-desc">How to use my projects, and setup your own projects</p>
+        <div class="card__body">
+          <div class="card__text">
+            <h3 class="text-display-sm">View the docs</h3>
+            <p class="text-body">How to use my projects, and set up your own.</p>
           </div>
-          <div class="btn-group">
-            <button class="btn btn-outline btn-md"><i data-lucide="arrow-right"></i>View</button>
+          <div class="card__actions">
+            <a href="#projects" class="btn btn--outline btn--md"><i data-lucide="arrow-right"></i>View</a>
           </div>
         </div>
-      </div>
+      </article>
     </div>
   </section>
 
-  <!-- DOWNLOAD HERO -->
-  <section class="hero hero-download" id="download">
-    <h1 class="hero-title">Dowload this site</h1>
-    <p class="hero-subtitle">click to this text</p>
+
+  <!-- ── DOWNLOAD ── -->
+  <section class="hero hero--download" id="download">
+    <h1 class="text-display-lg">Download this site</h1>
+    <p class="text-subtitle">Get the source code for this page</p>
+    <a href="index.html" download="naebro-projects.html" class="btn--download">
+      <i data-lucide="download"></i>Download HTML
+    </a>
   </section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="footer-logo">
-      <svg width="23" height="35" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+
+  <!-- ── FOOTER ── -->
+  <footer class="footer">
+    <div class="footer__logo">
+      <svg width="23" height="35" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M6 18C6 15.79 7.79 14 10 14H14V22H10C7.79 22 6 20.21 6 18Z" fill="#1E1E1E"/>
         <path d="M14 14H18C20.21 14 22 15.79 22 18C22 20.21 20.21 22 18 22H14V14Z" fill="#1E1E1E"/>
         <path d="M6 10C6 7.79 7.79 6 10 6H14V14H10C7.79 14 6 12.21 6 10Z" fill="#1E1E1E"/>
@@ -601,144 +130,146 @@
       </svg>
     </div>
 
-    <div class="footer-links">
-      <div class="footer-links-title">Resources</div>
+    <nav class="footer__links" aria-label="Footer links">
+      <span class="footer__links-title">Resources</span>
       <a href="#">Blog</a>
       <a href="#">Best practices</a>
       <a href="#">Colors</a>
       <a href="#">About</a>
-    </div>
+    </nav>
   </footer>
 
-  <!-- POPUP -->
-  <div class="popup-overlay" id="popup-overlay">
+
+  <!-- ── POPUP ── -->
+  <div class="popup-overlay" id="popup-overlay" role="dialog" aria-modal="true" aria-labelledby="popup-title">
     <div class="popup" id="popup">
-      <div class="popup-header">
-        <div class="popup-icon-wrap" id="popup-icon"></div>
-        <button class="popup-close" id="popup-close"></button>
+      <div class="popup__header">
+        <div class="popup__icon" id="popup-icon"></div>
+        <button class="popup__close" id="popup-close" aria-label="Close dialog"></button>
       </div>
-      <div class="popup-title" id="popup-title"></div>
-      <div class="popup-body" id="popup-body"></div>
-      <div class="popup-tags" id="popup-tags"></div>
-      <div class="popup-footer">
-        <button class="btn-popup-secondary" id="popup-cancel"></button>
-        <button class="btn-popup-primary" id="popup-open"></button>
+      <h2 class="text-display-sm" id="popup-title"></h2>
+      <p class="text-body-sm" id="popup-body"></p>
+      <div class="popup__tags" id="popup-tags"></div>
+      <div class="popup__footer">
+        <button class="btn--popup-secondary" id="popup-cancel"></button>
+        <button class="btn--popup-primary" id="popup-open"></button>
       </div>
     </div>
   </div>
 
+
   <script type="module">
     import { createIcons, icons } from 'https://esm.sh/lucide@latest';
 
-    // helper — render all data-lucide attrs in the whole doc or a subtree
-    const render = (el) => createIcons({ icons, nameAttr: 'data-lucide', rootNode: el ?? document });
+    // Render all data-lucide icons in a given subtree (or the whole document)
+    const renderIcons = (root = document) =>
+      createIcons({ icons, nameAttr: 'data-lucide', rootNode: root });
 
-    // ── Project data ──
-    const projects = [
+    // ── Project data (single source of truth) ──────────────────────────────
+    const PROJECTS = [
       {
         icon: 'layout-dashboard',
         title: 'Dashboard UI',
         body: 'A clean analytics dashboard with real-time charts, interactive filters, and a fully responsive layout. Built with performance in mind — every component is optimised for fast rendering and smooth interactions across all screen sizes.',
-        tags: ['Figma', 'React', 'Recharts', 'Tailwind']
+        tags: ['Figma', 'React', 'Recharts', 'Tailwind'],
       },
       {
         icon: 'code-2',
         title: 'Component Kit',
         body: 'A comprehensive reusable component library covering buttons, inputs, modals, tooltips, and more. Designed with Figma variables and exported directly to production-ready code with full accessibility support.',
-        tags: ['Figma', 'Storybook', 'TypeScript', 'CSS Tokens']
+        tags: ['Figma', 'Storybook', 'TypeScript', 'CSS Tokens'],
       },
       {
         icon: 'sparkles',
         title: 'AI Playground',
         body: 'An interactive sandbox for testing AI prompts, comparing model outputs side-by-side, and exploring creative generation workflows. Supports streaming responses and lets you save, fork, and share prompt presets.',
-        tags: ['Next.js', 'OpenAI API', 'Streaming', 'Vercel']
-      }
+        tags: ['Next.js', 'OpenAI API', 'Streaming', 'Vercel'],
+      },
     ];
 
-    // ── Seed static icons ──
-    // nav, header buttons, card images, docs card button
-    document.querySelectorAll('.nav-pill').forEach((el, i) => {
-      el.insertAdjacentHTML('afterbegin', `<i data-lucide="${i === 0 ? 'layout-grid' : 'download'}"></i>`);
-    });
-    const [docsBtn, ghBtn] = document.querySelectorAll('.header-auth .btn');
-    docsBtn.insertAdjacentHTML('afterbegin', '<i data-lucide="book-open"></i>');
-    ghBtn.insertAdjacentHTML('afterbegin', '<i data-lucide="github"></i>');
-
-    document.querySelectorAll('.card[data-project] .card-image').forEach((el, i) => {
-      el.innerHTML = `<i data-lucide="${projects[i].icon}"></i>`;
-    });
-    document.querySelector('.card-wide .card-image').innerHTML = '<i data-lucide="book-marked"></i>';
-    document.querySelector('.card-wide .btn-group .btn').insertAdjacentHTML('afterbegin', '<i data-lucide="arrow-right"></i>');
-
-    // render everything at once
-    render();
-
-    // ── Popup logic ──
+    // ── Popup ───────────────────────────────────────────────────────────────
     const overlay   = document.getElementById('popup-overlay');
+    const popup     = document.getElementById('popup');
     const closeBtn  = document.getElementById('popup-close');
     const cancelBtn = document.getElementById('popup-cancel');
     const openBtn   = document.getElementById('popup-open');
 
-    function openPopup(idx) {
-      const p = projects[idx];
-      document.getElementById('popup-title').textContent = p.title;
-      document.getElementById('popup-body').textContent  = p.body;
+    function openPopup(index) {
+      const project = PROJECTS[index];
 
-      document.getElementById('popup-icon').innerHTML   = `<i data-lucide="${p.icon}"></i>`;
+      document.getElementById('popup-title').textContent = project.title;
+      document.getElementById('popup-body').textContent  = project.body;
+
+      document.getElementById('popup-icon').innerHTML = `<i data-lucide="${project.icon}"></i>`;
       closeBtn.innerHTML  = `<i data-lucide="x"></i>`;
       cancelBtn.innerHTML = `<i data-lucide="x-circle"></i> Close`;
       openBtn.innerHTML   = `<i data-lucide="arrow-up-right"></i> Open project`;
 
-      document.getElementById('popup-tags').innerHTML = p.tags
-        .map(t => `<span class="popup-tag"><i data-lucide="tag"></i>${t}</span>`)
+      document.getElementById('popup-tags').innerHTML = project.tags
+        .map(tag => `<span class="popup__tag"><i data-lucide="tag"></i>${tag}</span>`)
         .join('');
 
-      render(document.getElementById('popup'));
+      renderIcons(popup);
 
-      overlay.classList.add('open');
+      overlay.classList.add('is-open');
       document.body.style.overflow = 'hidden';
     }
 
     function closePopup() {
-      overlay.classList.remove('open');
+      overlay.classList.remove('is-open');
       document.body.style.overflow = '';
     }
 
+    // Popup event bindings
     document.querySelectorAll('.card[data-project]').forEach(card => {
-      card.addEventListener('click', () => openPopup(+card.dataset.project));
+      card.addEventListener('click', () => openPopup(Number(card.dataset.project)));
+      card.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          openPopup(Number(card.dataset.project));
+        }
+      });
     });
+
     closeBtn.addEventListener('click', closePopup);
     cancelBtn.addEventListener('click', closePopup);
     overlay.addEventListener('click', e => { if (e.target === overlay) closePopup(); });
     document.addEventListener('keydown', e => { if (e.key === 'Escape') closePopup(); });
 
-    // ── Nav pill active + smooth scroll ──
-    const pills    = document.querySelectorAll('.nav-pill[href^="#"]');
-    const sections = [...pills].map(p => document.querySelector(p.getAttribute('href')));
+    // ── Nav active state (scroll-driven) ───────────────────────────────────
+    const navPills = document.querySelectorAll('.nav__pill[href^="#"]');
 
-    const setActive = (id) => pills.forEach(p =>
-      p.classList.toggle('active', p.getAttribute('href') === '#' + id)
-    );
+    function setActivePill(sectionId) {
+      navPills.forEach(pill =>
+        pill.classList.toggle('is-active', pill.getAttribute('href') === `#${sectionId}`)
+      );
+    }
 
-    new IntersectionObserver((entries) => {
-      entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
-    }, { rootMargin: '-40% 0px -55% 0px' }).observe
-      && sections.forEach(s => {
-        if (s) new IntersectionObserver(
-          (entries) => entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id); }),
-          { rootMargin: '-40% 0px -55% 0px' }
-        ).observe(s);
-      });
+    navPills.forEach(pill => {
+      const target = document.querySelector(pill.getAttribute('href'));
+      if (!target) return;
 
-    pills.forEach(pill => {
+      new IntersectionObserver(
+        ([entry]) => { if (entry.isIntersecting) setActivePill(target.id); },
+        { rootMargin: '-40% 0px -55% 0px' }
+      ).observe(target);
+    });
+
+    // ── Smooth scroll for nav pills ────────────────────────────────────────
+    const headerHeight = () => document.querySelector('.header').offsetHeight;
+
+    navPills.forEach(pill => {
       pill.addEventListener('click', e => {
         e.preventDefault();
         const target = document.querySelector(pill.getAttribute('href'));
         if (!target) return;
-        const top = target.getBoundingClientRect().top + window.scrollY - document.querySelector('header').offsetHeight;
-        window.scrollTo({ top, behavior: 'smooth' });
+        const scrollTop = target.getBoundingClientRect().top + window.scrollY - headerHeight();
+        window.scrollTo({ top: scrollTop, behavior: 'smooth' });
       });
     });
+
+    // ── Initial icon render ────────────────────────────────────────────────
+    renderIcons();
   </script>
 
 </body>

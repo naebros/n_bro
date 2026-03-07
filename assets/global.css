@@ -1,0 +1,733 @@
+/* ============================================================
+   GLOBAL CSS — Naebro's Projects
+   Structure:
+     1. Reset & Base
+     2. Design Tokens (CSS Variables)
+     3. Typography
+     4. Layout Utilities
+     5. Components
+        5a. Header
+        5b. Nav
+        5c. Buttons
+        5d. Hero
+        5e. Section
+        5f. Cards
+        5g. Popup
+        5h. Footer
+   ============================================================ */
+
+
+/* ── 1. Reset & Base ── */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  color: var(--color-text);
+  background: var(--color-bg);
+}
+
+
+/* ── 2. Design Tokens ── */
+
+:root {
+  /* Colors */
+  --color-bg:           #ffffff;
+  --color-surface:      #f5f5f5;
+  --color-surface-alt:  #e3e3e3;
+  --color-border:       #d9d9d9;
+  --color-border-mid:   #767676;
+  --color-text:         #1e1e1e;
+  --color-text-muted:   #757575;
+  --color-text-subtle:  #555555;
+  --color-inverted-bg:  #2c2c2c;
+  --color-inverted-text:#f5f5f5;
+
+  /* Typography */
+  --font-display: 'Playfair Display', serif;
+  --font-body:    'Inter', sans-serif;
+
+  /* Spacing scale */
+  --space-1:   4px;
+  --space-2:   8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  24px;
+  --space-6:  32px;
+  --space-7:  48px;
+  --space-8:  64px;
+
+  /* Border radius */
+  --radius-sm:  4px;
+  --radius-md:  8px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+
+  /* Shadows */
+  --shadow-card:   0 4px 20px rgba(0, 0, 0, 0.08);
+  --shadow-popup:  0 24px 64px rgba(0, 0, 0, 0.18);
+  --shadow-overlay: rgba(0, 0, 0, 0.35);
+
+  /* Transitions */
+  --transition-fast:   0.15s ease;
+  --transition-normal: 0.2s ease;
+  --transition-popup:  0.25s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Layout */
+  --content-max-width: 1072px;
+  --header-height: 67px;
+
+  /* Intersection observer scroll margins (nav active state) */
+  --scroll-margin-top:    -40%;
+  --scroll-margin-bottom: -55%;
+}
+
+
+/* ── 3. Typography ── */
+
+.text-display-lg {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 72px;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+}
+
+.text-display-md {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 64px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.text-display-sm {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+}
+
+.text-subtitle {
+  font-family: var(--font-body);
+  font-size: 32px;
+  line-height: 1.2;
+  color: var(--color-text-muted);
+}
+
+.text-body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-text-muted);
+}
+
+.text-body-sm {
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+}
+
+.text-label {
+  font-family: var(--font-body);
+  font-size: 20px;
+  line-height: 1.2;
+  color: var(--color-text-muted);
+}
+
+
+/* ── 4. Layout Utilities ── */
+
+.content-width {
+  width: 100%;
+  max-width: var(--content-max-width);
+}
+
+
+/* ── 5. Components ── */
+
+/* ── 5a. Header ── */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: var(--space-4) var(--space-6);
+  gap: var(--space-5);
+  background: rgba(255, 255, 255, 0.7);
+  border-bottom: 1px solid var(--color-border);
+  backdrop-filter: blur(6.5px);
+}
+
+.header__logo {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 35px;
+  flex-shrink: 0;
+}
+
+.header__logo svg {
+  width: 23px;
+  height: 35px;
+}
+
+.header__auth {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+
+/* ── 5b. Nav ── */
+
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.nav__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  height: 32px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1;
+  color: var(--color-text);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--transition-normal);
+}
+
+.nav__pill.is-active,
+.nav__pill:hover {
+  background: var(--color-surface);
+}
+
+
+/* ── 5c. Buttons ── */
+
+/*
+  Icon-reveal pattern (applied to all button variants):
+  - gap starts at 0 so no empty space when icon is hidden
+  - on hover: gap opens + icon fades/grows in simultaneously
+*/
+
+/* Base button */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: var(--space-2) var(--space-3);
+  height: 32px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: gap var(--transition-normal);
+}
+
+.btn:hover { gap: 6px; }
+
+.btn [data-lucide] {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition:
+    opacity var(--transition-normal),
+    width var(--transition-normal);
+}
+
+.btn:hover [data-lucide] {
+  opacity: 1;
+  width: 15px;
+}
+
+/* Modifier: outlined / secondary */
+.btn--outline {
+  background: var(--color-surface-alt);
+  border: 1px solid var(--color-border-mid);
+  color: var(--color-text);
+}
+
+.btn--outline:hover { background: var(--color-border); }
+
+/* Modifier: filled / primary */
+.btn--dark {
+  background: var(--color-inverted-bg);
+  border: 1px solid var(--color-inverted-bg);
+  color: var(--color-inverted-text);
+}
+
+.btn--dark:hover { background: #333333; }
+
+/* Modifier: medium size (used in card actions) */
+.btn--md {
+  padding: var(--space-3);
+  height: 40px;
+}
+
+/* Standalone download button in the download hero */
+.btn--download {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 14px 28px;
+  height: 52px;
+  border-radius: var(--radius-lg);
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-weight: 600;
+  background: var(--color-text);
+  color: var(--color-bg);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    background var(--transition-normal),
+    gap var(--transition-normal);
+}
+
+.btn--download:hover {
+  background: #333333;
+  gap: var(--space-2);
+}
+
+.btn--download [data-lucide] {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition:
+    opacity var(--transition-normal),
+    width var(--transition-normal);
+}
+
+.btn--download:hover [data-lucide] {
+  opacity: 1;
+  width: 20px;
+}
+
+/* Popup button variants */
+.btn--popup-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 18px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 15px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-text);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    gap var(--transition-normal);
+}
+
+.btn--popup-secondary:hover {
+  background: var(--color-surface-alt);
+  gap: 6px;
+}
+
+.btn--popup-secondary [data-lucide] {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition:
+    opacity var(--transition-normal),
+    width var(--transition-normal);
+}
+
+.btn--popup-secondary:hover [data-lucide] {
+  opacity: 1;
+  width: 15px;
+}
+
+.btn--popup-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0;
+  padding: 10px 18px;
+  height: 40px;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 15px;
+  background: var(--color-text);
+  border: 1px solid var(--color-text);
+  color: var(--color-bg);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    gap var(--transition-normal);
+}
+
+.btn--popup-primary:hover {
+  background: #333333;
+  gap: 6px;
+}
+
+.btn--popup-primary [data-lucide] {
+  opacity: 0;
+  width: 0;
+  overflow: hidden;
+  transition:
+    opacity var(--transition-normal),
+    width var(--transition-normal);
+}
+
+.btn--popup-primary:hover [data-lucide] {
+  opacity: 1;
+  width: 15px;
+}
+
+
+/* ── 5d. Hero ── */
+
+.hero {
+  width: 100%;
+  min-height: 551px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 160px var(--space-8);
+  background: var(--color-surface);
+  text-align: center;
+  gap: var(--space-2);
+}
+
+/* Modifier: download hero has extra gap for the CTA button */
+.hero--download {
+  gap: var(--space-6);
+}
+
+
+/* ── 5e. Section ── */
+
+.section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-8);
+  gap: var(--space-7);
+  background: var(--color-bg);
+}
+
+.section__heading {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: var(--content-max-width);
+}
+
+
+/* ── 5f. Cards ── */
+
+/* Shared card base */
+.card {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: flex-start;
+  padding: var(--space-5);
+  gap: var(--space-5);
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: box-shadow var(--transition-normal);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-card);
+}
+
+/* Card grid — 3 columns */
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-7);
+  width: 100%;
+  max-width: var(--content-max-width);
+}
+
+.card-grid .card {
+  flex: 1 1 240px;
+  min-width: 240px;
+}
+
+/* Card row — full width */
+.card-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-7);
+  width: 100%;
+  max-width: var(--content-max-width);
+}
+
+.card-row .card {
+  flex: 1 1 100%;
+}
+
+/* Card internals */
+.card__image {
+  width: 160px;
+  min-width: 160px;
+  height: 160px;
+  background: var(--color-surface-alt);
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.card__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  flex: 1 1 160px;
+  min-width: 160px;
+}
+
+.card__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.card__actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: var(--space-4);
+  width: 100%;
+}
+
+
+/* ── 5g. Popup ── */
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--shadow-overlay);
+  backdrop-filter: blur(4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition-popup);
+}
+
+.popup-overlay.is-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.popup {
+  background: var(--color-bg);
+  border-radius: var(--radius-xl);
+  padding: var(--space-6);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: var(--shadow-popup);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  transform: translateY(16px) scale(0.97);
+  transition: transform var(--transition-popup);
+}
+
+.popup-overlay.is-open .popup {
+  transform: translateY(0) scale(1);
+}
+
+.popup__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.popup__icon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-lg);
+  background: var(--color-surface);
+  border: 1px solid var(--color-surface-alt);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.popup__close {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-md);
+  background: none;
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-muted);
+  transition:
+    background var(--transition-fast),
+    color var(--transition-fast);
+}
+
+.popup__close:hover {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+.popup__tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.popup__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  background: var(--color-surface);
+  border: 1px solid var(--color-surface-alt);
+  font-size: 13px;
+  color: var(--color-text-subtle);
+}
+
+.popup__footer {
+  display: flex;
+  gap: var(--space-3);
+  justify-content: flex-end;
+}
+
+
+/* ── 5h. Footer ── */
+
+.footer {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: var(--space-6) var(--space-6) var(--space-8);
+  gap: var(--space-6);
+  width: 100%;
+  background: var(--color-bg);
+  border-top: 1px solid var(--color-border);
+}
+
+.footer__logo {
+  display: flex;
+  align-items: center;
+}
+
+.footer__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.footer__links-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-text);
+  padding-bottom: var(--space-1);
+}
+
+.footer__links a {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.4;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.footer__links a:hover {
+  text-decoration: underline;
+}
+
+
+/* ── Lucide icon size overrides ── */
+
+[data-lucide] {
+  width: 18px;
+  height: 18px;
+  stroke-width: 1.8;
+  flex-shrink: 0;
+}
+
+.popup__icon [data-lucide] {
+  width: 24px;
+  height: 24px;
+}
+
+.nav__pill [data-lucide] {
+  width: 15px;
+  height: 15px;
+}
+
+.btn [data-lucide] {
+  height: 15px;
+}
+
+.card__image [data-lucide] {
+  width: 40px;
+  height: 40px;
+  stroke: #aaaaaa;
+  stroke-width: 1.2;
+}
+
+.btn--download [data-lucide] {
+  width: 20px;
+  height: 20px;
+}
