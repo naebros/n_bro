@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="light">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
+  <script>
+  (function(){var t=localStorage.getItem('naebro-theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+</script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>404 — Naebro</title>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;600&display=swap" rel="stylesheet" />
@@ -101,16 +104,14 @@
   <script type="module">
     import { createIcons, icons } from 'https://esm.sh/lucide@latest';
 
+    // ── Icons ─────────────────────────────────────────────────────────────────
     const renderIcons = (root = document) =>
       createIcons({ icons, nameAttr: 'data-lucide', rootNode: root });
 
-    // ── Dark mode ───────────────────────────────────────────────────────────
+    // ── Dark mode ─────────────────────────────────────────────────────────────
+    const THEME_KEY   = 'naebro-theme';
     const html        = document.documentElement;
     const themeToggle = document.getElementById('theme-toggle');
-    const THEME_KEY   = 'naebro-theme';
-
-    const savedTheme = localStorage.getItem(THEME_KEY) ?? 'light';
-    setTheme(savedTheme);
 
     function setTheme(theme) {
       html.setAttribute('data-theme', theme);
@@ -121,12 +122,13 @@
       renderIcons(themeToggle);
     }
 
+    setTheme(localStorage.getItem(THEME_KEY) ?? 'light');
+
     themeToggle.addEventListener('click', () => {
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      setTheme(next);
+      setTheme(html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark');
     });
 
-    // ── Scroll reveal ───────────────────────────────────────────────────────
+    // ── Scroll reveal ─────────────────────────────────────────────────────────
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -136,10 +138,23 @@
       });
     }, { rootMargin: '-5% 0px -5% 0px', threshold: 0.1 });
 
-    document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+    const staggerObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          staggerObserver.unobserve(entry.target);
+        }
+      });
+    }, { rootMargin: '-5% 0px -5% 0px', threshold: 0.1 });
 
-    // ── Initial icon render ─────────────────────────────────────────────────
+    function initReveal() {
+      document.querySelectorAll('[data-reveal]').forEach(el => revealObserver.observe(el));
+      document.querySelectorAll('[data-reveal-stagger]').forEach(el => staggerObserver.observe(el));
+    }
+
+    // ── Initial render & reveal ────────────────────────────────────────────
     renderIcons();
+    initReveal();
   </script>
 
 </body>
